@@ -5,16 +5,26 @@ import Product from './Product';
 
 //context API 
 import {ProductContext} from "../contextAPI/ProductContext"
+import {CartContext} from "../contextAPI/CarContext"
 
-const Products = props => {
+
+
+const Products = () => {
 	const [products] = useContext(ProductContext)
+	const[cart, setCart] = useContext(CartContext)
+
+	const addItem = item => {
+	
+		setCart([...cart, item])
+	};
+
 	return (
 		<div className="products-container">
 			{products.map(product => (
 				<Product
 					key={product.id}
 					product={product}
-					addItem={props.addItem}
+					addItem={addItem}
 				/>
 			))}
 		</div>
